@@ -5,6 +5,8 @@ Created on Dec 1, 2016
 '''
 providerfilename='../resources/providerlist.txt'
 providerhdr=True
+billproviderfilename='../resources/billproviderlist.txt'
+billproviderhdr=True
 claimantfilename='../resources/claimantlist.txt'
 claimanthdr=True
 cptcodesfilename='../resources/cptcodes.txt'

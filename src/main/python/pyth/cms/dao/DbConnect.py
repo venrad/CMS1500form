@@ -27,7 +27,7 @@ class DbConnector(object):
         self.mysqlConnect = mysql.connector.connect(**self.appProp.db_config)
         
     def insertRecord(self, billLine):
-        hdr='(ClaimantId, ClaimantName, Gender, ClaimantAddress, ClaimantCity, ClaimantState, ClaimantZipcode, ClaimNumber, BillNumber, BillingProviderNPI, BillingProviderName, BillingProviderAddress, BillingProviderCity, BillingProviderState, BillingProviderZip, RenderingProviderNPI, RenderingProviderName, RenderingProviderAddress, RenderingProviderCity, RenderingProviderState, RenderingProviderZip, FacilityProviderNPI, FacilityProviderName, FacilityProviderAddress, FacilityProviderCity, FacilityProviderState, FacilityProviderZip, LineNumber, BilledCPTcode, BilledAmount, PaidCPTcode, PaidAmount)'
+        hdr='(ClaimantId, ClaimantName, Gender, ClaimantAddress, ClaimantCity, ClaimantState, ClaimantZipcode, ClaimNumber, BillNumber, TaxId, BillingProviderNPI, BillingProviderName, BillingProviderAddress, BillingProviderCity, BillingProviderState, BillingProviderZip, RenderingProviderNPI, RenderingProviderName, RenderingProviderAddress, RenderingProviderCity, RenderingProviderState, RenderingProviderZip, FacilityProviderNPI, FacilityProviderName, FacilityProviderAddress, FacilityProviderCity, FacilityProviderState, FacilityProviderZip, LineNumber, BilledCPTcode, BilledAmount, PaidCPTcode, PaidAmount)'
         insert_stmt = 'INSERT INTO BillLines '+ hdr + ' VALUES (' + billLine.dbOutputFormat() + ')'
         print(insert_stmt)
         self.connect()

@@ -5,8 +5,10 @@ Created on Nov 30, 2016
 '''
 
 from pyth.cms.dao.DbConnect import DbConnector
-from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine
+from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine,\
+    BillingProvider
 from pyth.cms.properties import appProperties as appProp
+
 
 def printdict(dictitem,d2):
     keys = dictitem.keys()
@@ -23,6 +25,11 @@ def prepareData(appProp):
     provider = Provider()
     providerlist = provider.getProviders()
     providerslen = len(providerlist)
+    
+    billprovider = BillingProvider()
+    billingproviderlist = billprovider.getBillProviders()
+    billproviderslen =len(billingproviderlist)
+    
         
     claimant = Claimant()
     cllist = claimant.getClaimants()
@@ -46,8 +53,8 @@ def prepareData(appProp):
                         BillLine(cllist[clmt],   #Claimant 
                                  appProp.CLAIM_PREFIX + str(claim).ljust(3,'0'), # claim number
                                  appProp.BILL_PREFIX+appProp.CLAIM_PREFIX+str(bills).ljust(6,'0'), # Bill Number
-                                 providerlist[bills  % providerslen], # Billing Provider
-                                 providerlist[(bills-1) % providerslen], # Rendering Provider
+                                 billingproviderlist[bills  % billproviderslen], # Billing Provider
+                                 providerlist[(bills) % providerslen], # Rendering Provider
                                  providerlist[(bills - 2)% providerslen], #facility provider
                                  lineno, 
                                  cpts[lineno % cptslen], # Billed copt

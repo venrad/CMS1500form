@@ -62,6 +62,61 @@ class Provider:
                                           'NULL' if self.state == '' else "'" +self.state+"'", 
                                           'NULL' if self.zipcode == '' else "'" +self.zipcode+"'")
            
+'''
+
+'''
+class BillingProvider:             
+    def __init__(self,  taxid='', npi='', name='', addr1='', city='', state='', zipcode=''):
+        self.taxid= taxid
+        self.npi = npi
+        self.name = name
+        self.addr1 = addr1
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+            
+    def __str__(self):
+        return '%s |%s | %s| %s| %s| %s| %s' %(self.taxid, self.npi, self.name, self.addr1, self.city, self.state, self.zipcode)
+    
+    def printHeaderLabels(self,type=''):
+       prefix=type+self.__class__.__name__
+       return '%s |%s | %s| %s| %s| %s| %s' %('Taxid', 
+                                              prefix+'NPI', 
+                                              prefix+'Name',
+                                              prefix +'Address',
+                                              prefix + 'City',
+                                              prefix + 'State',
+                                              prefix + 'Zip')
+    # function to get provider array to be used during the file file building
+    def getBillProviders(self):
+        billproviders=[]
+        i=0
+        with open(appProperties.billproviderfilename, 'rU') as csvfile:
+            csvread = csv.reader(csvfile, delimiter='|')
+            for line in csvread:
+                if appProperties.billproviderhdr:
+                    if i==0:
+                        i+=1
+                        continue
+                billproviders.append(self.parseProviderInfo(line))        
+            return billproviders
+    
+    #function to parse the line to get a provider object
+    def parseProviderInfo(self, line):
+        return BillingProvider(line[0], line[1], line[2], line[3], line[4],line[5], line[6])
+    
+    def dbOutputFormat(self):      
+        return '%s, %s, %s, %s, %s, %s, %s' %("'" + self.taxid + "'", 
+                                          'NULL' if self.npi =='' else "'" + self.npi +"'",
+                                          'NULL' if self.name == '' else "'" +self.name+"'",
+                                          'NULL' if self.addr1 == '' else "'" +self.addr1+"'", 
+                                          'NULL' if self.city == '' else "'" +self.city+"'", 
+                                          'NULL' if self.state == '' else "'" +self.state+"'", 
+                                          'NULL' if self.zipcode == '' else "'" +self.zipcode+"'")
+           
+
+
+
 class Claimant :
     def __init__(self, id='', name='', gender='', addr1='', city='', state='', zipcode=''):
         self.id=id

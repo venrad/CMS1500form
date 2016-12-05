@@ -1,1 +1,101 @@
-npi|name|addr1|city|state|zipcode1324011|Remedy Makers|0416 Sugar Point|Washington|District of Columbia|200511324012|Sandoz Inc|1 Golf Course Road|Knoxville|Tennessee|379951324013|Ventura Corporation LTD|64082 Gerald Point|Kingsport|Tennessee|376651324014|Johnson & Johnson Consumer Products Company, Division of Johnson & Johnson Consumer Companies, Inc.|97725 Armistice Point|Fairfield|Connecticut|068251324015|Eisai Inc.|411 Steensland Avenue|Virginia Beach|Virginia|234591324016|Global Pharmaceuticals, Division of Impax Laboratories Inc.|083 Merrick Parkway|Arlington|Virginia|222441324017|Wal-Mart Stores Inc|25 Park Meadow Trail|Carol Stream|Illinois|603511324018|Rebel Distributors Corp|3466 Warner Hill|Stamford|Connecticut|069221324019|Valeant Pharmaceuticals North America LLC|99598 Bashford Hill|El Paso|Texas|799991324010|REMEDYREPACK INC.|9901 Elgar Park|Albany|New York|122051324011|MedVantx, Inc.|805 Barnett Court|Des Moines|Iowa|503621324012|ABCO Laboratories, Inc|769 Mayer Hill|Knoxville|Tennessee|379141324013|Physicians Total Care, Inc.|11 Pankratz Trail|Birmingham|Alabama|352361324014|CHANEL PARFUMS BEAUTE|105 Merchant Hill|Boston|Massachusetts|021041324015|APP Pharmaceuticals, LLC|6565 Haas Plaza|Richmond|Virginia|232281324016|Jubilant HollisterStier LLC|513 Truax Trail|Canton|Ohio|447101324017|Uriel Pharmacy Inc.|7 Londonderry Point|Miami|Florida|332611324018|Save-A-Lot Food Stores Ltd|9 Bartillon Junction|Muskegon|Michigan|494441324019|Physician Therapeutics LLC|01190 Hanover Road|New York City|New York|101051324020|A-S Medication Solutions LLC|65 High Crossing Court|Bronx|New York|104741324021|Forces of Nature|234 Monica Center|Greensboro|North Carolina|274041324022|Tiger Balm (Malaysia) Sdn. Bhd.|34232 Blaine Drive|Apache Junction|Arizona|852191324023|H.J. Harkins Company, Inc.|951 Calypso Place|Houston|Texas|770651324024|Major Pharmaceuticals|67887 Glendale Street|Clearwater|Florida|337581324025|REMEDY MAKERS|03 Walton Plaza|Austin|Texas|787891324026|Family Dollar|756 Corben Parkway|Ashburn|Virginia|220931324027|H.J. Harkins Company, Inc.|9360 Schurz Hill|Anaheim|California|928051324028|CVS|82 Boyd Trail|Concord|California|945221324029|Parfums Christian Dior|47828 Fremont Way|Washington|District of Columbia|202441324030|Physicians Total Care, Inc.|2 Thierer Plaza|Florence|South Carolina|295051324031|Moore Medical LLC|665 Merry Place|Albany|New York|122271324032|ESTEE LAUDER INC|7 Del Sol Court|Fairbanks|Alaska|997901324033|Walgreen Company|845 American Center|Saint Louis|Missouri|631431324034|HEALTHPOINT, LTD|58 Farmco Circle|Miami|Florida|331341324035|Laboratoires Clarins S.A|17 Atwood Point|Oklahoma City|Oklahoma|731521324036|Nelco Laboratories, Inc.|59 Oak Valley Court|Lubbock|Texas|794521324037|Reckitt Benckiser LLC|29 Summit Street|Charleston|West Virginia|253621324038|Guna spa|83141 Forster Terrace|Houston|Texas|770101324039|DZA Brands LLC|47683 Morrow Road|Pittsburgh|Pennsylvania|152301324040|Legacy Pharmaceutical Packaging|1872 Golf View Court|Portland|Oregon|972861324041|Aidarex Pharmaceuticals LLC|9 Del Sol Junction|Baton Rouge|Louisiana|708261324042|Walgreen CO|63 Laurel Lane|Johnson City|Tennessee|376051324043|Major Pharmaceuticals|8181 Sunbrook Way|Raleigh|North Carolina|276581324044|Rite Aid Corporation|089 Delladonna Avenue|Scranton|Pennsylvania|185051324045|Daiichi Sankyo, Inc.|1943 Dakota Avenue|Newark|New Jersey|071121324046|Nelco Laboratories, Inc.|3 North Point|Gainesville|Florida|326051324047|Wal-Mart Stores Inc|2 Buell Lane|Des Moines|Iowa|509361324048|Target Corporation|915 Burrows Circle|San Mateo|California|944051324049|NATURE REPUBLIC CO., LTD.|3177 Stang Center|Daytona Beach|Florida|321231324050|Aidarex Pharmaceuticals LLC|7 Sutteridge Terrace|Amarillo|Texas|79176
+npi|name|addr1|city|state|zipcode
+1324061|Kareway Product, Inc.|2 Hintze Center|Fairfield|CT|06825
+1324069|McKesson Packaging Services Business unit of McKesson Corporation|831 Dayton Alley|Washington|DC|20557
+1324064|SKINFOOD CO., LTD.|5937 2nd Street|Columbus|OH|43215
+1324086|Golden State Medical Supply, Inc.|4942 Harper Pass|Columbus|OH|43215
+1324052|ALK-Abello, Inc.|35998 Kennedy Trail|New York City|NY|10115
+1324067|REMEDYREPACK INC.|8918 Basil Lane|El Paso|TX|79923
+1324089|STAT Rx USA LLC|6 Donald Lane|Las Vegas|NV|89150
+1324056|Allergan, Inc.|21 Toban Way|College Station|TX|77844
+1324079|ProPhase Labs, Inc.|57 Coleman Crossing|Kansas City|KS|66112
+1324088|Nelco Laboratories, Inc.|035 Katie Point|Amarillo|TX|79105
+1324072|Natures Way Holding Co.|9621 Clove Alley|Portland|OR|97221
+1324070|Janssen Products LP|407 Spaight Pass|Pueblo|CO|81010
+1324065|Excellium Pharmaceutical, Inc|6 Pond Lane|Columbus|OH|43220
+1324056|Kroger Company|2038 Ridge Oak Court|El Paso|TX|79968
+1324057|Summers Laboratories Inc|4362 Kingsford Parkway|Atlanta|GA|30306
+1324069|Dr.Reddys Laboratories Limited|859 Dapin Hill|Mesquite|TX|75185
+1324078|Physicians Total Care, Inc.|748 Golf Parkway|Jacksonville|FL|32230
+1324062|L Perrigo Company|75 Paget Way|Springfield|IL|62794
+1324058|Rhodes Pharmaceuticals L. P.|925 Delladonna Alley|El Paso|TX|79945
+1324087|Sandoz Inc|925 Ridge Oak Alley|Oakland|CA|94627
+1324069|ALK-Abello, Inc.|51342 Maple Center|Cumming|GA|30130
+1324060|Cardinal Health|3 Farwell Terrace|Falls Church|VA|22047
+1324072|PharmaDerm, A division of Nycomed US Inc.|9 Dottie Avenue|El Paso|TX|88530
+1324089|Cantrell Drug Company|826 Waubesa Point|Sparks|NV|89436
+1324085|Antigen Laboratories, Inc.|613 Dahle Crossing|Provo|UT|84605
+1324083|Beacon Promotions, Inc.|21 Mosinee Crossing|Springfield|MO|65805
+1324060|Par Pharmaceuticals, Inc.|78 Blue Bill Park Junction|Baton Rouge|LA|70883
+1324080|Roerig|5172 Dexter Circle|Memphis|TN|38188
+1324086|Korea Ginseng Corporation|075 Novick Place|Columbus|OH|43210
+1324061|LG Household and Healthcare, Inc.|365 Portage Way|Houston|TX|77228
+1324090|REMEDYREPACK INC.|96 Ridgeview Lane|Washington|DC|20205
+1324088|Nelco Laboratories, Inc.|6 Forster Drive|Fort Smith|AR|72905
+1324056|Reckitt Benckiser LLC|1 Alpine Court|Sparks|NV|89436
+1324079|Target Corporation|97 Vera Place|Pasadena|TX|77505
+1324098|REMEDYREPACK INC.|3259 Daystar Alley|Salinas|CA|93907
+1324076|West-ward Pharmaceutical Corp.|3 Oak Valley Drive|Arvada|CO|80005
+1324077|Cadence Pharmaceuticals, Inc.|7631 Texas Street|Miami Beach|FL|33141
+1324051|Washington Homeopathic Products|508 Bellgrove Place|Lexington|KY|40576
+1324061|Rebel Distributors Corp|56 Summit Court|Oklahoma City|OK|73109
+1324087|NARS Cosmetics|2753 Melby Plaza|Washington|DC|20244
+1324083|Physicians Total Care, Inc.|1 Rusk Park|Denver|CO|80209
+1324091|Aaron Industries, Inc.|39750 Warrior Court|San Diego|CA|92196
+1324060|Dynarex Corporation|72 Village Circle|Lake Worth|FL|33462
+1324080|Golden State Medical Supply, Inc.|97 Eastwood Avenue|Chico|CA|95973
+1324064|Liddell Laboratories, Inc.|4 Hoffman Lane|Hartford|CT|06183
+1324074|Safeway|3922 Barnett Alley|Jamaica|NY|11447
+1324099|Unit Dose Services|54674 Longview Crossing|Burbank|CA|91505
+1324075|Stephen L. LaFrance Pharmacy, Inc.|4725 Service Terrace|Austin|TX|78749
+1324100|Medicine Shoppe International Inc|8250 Shasta Court|Oklahoma City|OK|73157
+1324097|Natural Health Supply|1881 Spohn Junction|Phoenix|AZ|85099
+1324068|American Health Packaging|3 Bonner Street|Erie|PA|16550
+1324070|SHISEIDO AMERICAS CORPORATION|9 Fulton Park|Tucson|AZ|85732
+1324062|State of Florida DOH Central Pharmacy|94449 Park Meadow Way|Houston|TX|77010
+1324067|Proficient Rx LP|516 Lakewood Crossing|Houston|TX|77245
+1324087|WALGREEN COMPANY|91 Lotheville Court|Lubbock|TX|79452
+1324080|Prasco Laboratories|884 Almo Alley|Newton|MA|02458
+1324076|Idelle Labs, Ltd|05373 Grayhawk Park|Chattanooga|TN|37416
+1324057|PruGen, Inc.|324 Sachtjen Point|Roanoke|VA|24014
+1324052|Walgreen Co.|7535 Veith Parkway|Plano|TX|75074
+1324058|Preferred Pharmaceuticals, Inc|3 Bashford Hill|El Paso|TX|88558
+1324062|Ajes Pharmaceuticals,LLC|07989 Sutherland Drive|Saint Cloud|MN|56398
+1324096|Nelco Laboratories, Inc.|640 Nobel Terrace|Newport Beach|CA|92662
+1324092|Antigen Laboratories, Inc.|88 Hoffman Road|Lincoln|NE|68517
+1324065|Uriel Pharmacy Inc.|6262 Pankratz Parkway|Birmingham|AL|35220
+1324074|REMEDYREPACK INC.|5 Norway Maple Drive|Sacramento|CA|94286
+1324058|ProPhase Labs, Inc.|1 Tennessee Trail|Green Bay|WI|54313
+1324086|Preferred Plus (Kinray)|232 Hayes Park|Sacramento|CA|95894
+1324074|REMEDYREPACK INC.|98 Anthes Parkway|Shawnee Mission|KS|66205
+1324071|Parfums Christian Dior|9 Glendale Drive|Salt Lake City|UT|84152
+1324084|U.S. Oxygen and Supply, LLC|409 Mifflin Avenue|Cleveland|OH|44118
+1324082|OrchidPharma Inc|102 Russell Crossing|Orlando|FL|32868
+1324096|Aurobindo Pharma Limited|3575 Scoville Park|Hartford|CT|06152
+1324056|Kroger Company|48 Texas Terrace|Chicago|IL|60604
+1324095|Shanghai Aquagel Bio-Plymer Co., Ltd|7 Melby Parkway|Richmond|VA|23208
+1324089|Caregen Co., Ltd.|3516 Lien Hill|Norman|OK|73071
+1324095|Emilia Personal Care Inc.|425 Boyd Junction|New York City|NY|10115
+1324068|Pharmacia and Upjohn Company|618 Killdeer Place|Chicago|IL|60691
+1324093|Watson Pharma, Inc.|8695 Norway Maple Crossing|Little Rock|AR|72204
+1324056|Aidarex Pharmaceuticals LLC|9101 Gulseth Plaza|Dulles|VA|20189
+1324097|Ventura Corporation LTD.|23188 Linden Circle|Los Angeles|CA|90050
+1324090|A-S Medication Solutions LLC|9108 Bartillon Hill|Laurel|MD|20709
+1324087|Personal Care Products, LLC|481 Melrose Court|Rochester|NY|14652
+1324065|Rebel Distributors Corp|5 Talisman Parkway|Salt Lake City|UT|84199
+1324058|Preferred Pharmaceuticals, Inc|68 Farwell Center|Amarillo|TX|79182
+1324054|Advance Pharmaceutical Inc.|5936 Commercial Center|Midland|MI|48670
+1324054|Nelco Laboratories, Inc.|9357 Mcbride Circle|Peoria|AZ|85383
+1324079|Bishop Welding Supply|2176 Hanson Pass|Saint Paul|MN|55166
+1324098|Aurolife Pharma, LLC|2 Red Cloud Terrace|San Francisco|CA|94159
+1324074|Ecometics, Inc|8401 Morning Hill|Montgomery|AL|36134
+1324051|Nelco Laboratories, Inc.|8 Esch Junction|Oklahoma City|OK|73147
+1324077|Lake Erie Medical & Surgical Supply DBA Quality Care Products LLC|31 Schmedeman Drive|Lynn|MA|01905
+1324091|MedVantx, Inc.|358 Raven Crossing|Riverside|CA|92519
+1324078|Conopco Inc. d/b/a Unilever|7780 Division Crossing|Pasadena|CA|91109
+1324090|Rebel Distributors Corp|0 Fairview Junction|Philadelphia|PA|19184
+1324069|MedVantx, Inc.|1 Vera Hill|Fresno|CA|93709
+1324094|Accord Healthcare Inc.|9100 Ohio Plaza|Oakland|CA|94616
+1324086|Direct RX|83 Onsgard Center|Spokane|WA|99215
+1324083|REMEDYREPACK INC.|5 Golf Course Lane|Dayton|OH|45490
+1324077|Camber Pharmaceuticals Inc.|2196 Paget Center|Norfolk|VA|23509
+1324100|Physicians Total Care, Inc.|144 Merrick Center|San Diego|CA|92110
