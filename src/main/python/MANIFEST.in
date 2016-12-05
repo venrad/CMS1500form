@@ -1,1 +1,2 @@
 recursive-include pyth/cms/resources *
+include run.sh

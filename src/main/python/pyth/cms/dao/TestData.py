@@ -5,8 +5,7 @@ Created on Nov 30, 2016
 '''
 
 from pyth.cms.dao.DbConnect import DbConnector
-from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine,\
-    BillingProvider
+from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine, BillingProvider
 from pyth.cms.properties import appProperties as appProp
 
 
