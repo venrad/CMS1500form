@@ -8,16 +8,6 @@ from pyth.cms.dao.DbConnect import DbConnector
 from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine
 from pyth.cms.properties import appProperties as appProp
 
-def printdict(dictitem,d2):
-    keys = dictitem.keys()
-    for key in keys:
-        if isinstance(dictitem[key], dict):
-            printdict(dictitem[key],d2)
-        elif isinstance(dictitem[key],CptCode):
-            d2[key]=dictitem[key].__dict__
-        else:
-            d2[key]=dictitem[key]
-
 
 def prepareData(appProp):
     provider = Provider()
@@ -37,9 +27,9 @@ def prepareData(appProp):
     import random
     billlines=[]
     
-    for clmt in range(1, random.randint(2,appProp.MAX_CLAIMANT_COUNT)):
+    for clmt in range(1, random.randint(1,appProp.MAX_CLAIMANT_COUNT)):
         for claim in range(1, random.randint(1,appProp.MAX_CLAIM_COUNT)):
-            for bills in range(1, random.randint(2,appProp.MAX_BILLS_COUNT)):
+            for bills in range(1, random.randint(1,appProp.MAX_BILLS_COUNT)):
                 
                 for lineno in range(1, random.randint(1,appProp.MAX_LINES_PER_BILL)):
                     billlines.append(
@@ -58,19 +48,14 @@ def prepareData(appProp):
             
 if __name__ == '__main__':
     billlines = prepareData(appProp)
-    if appProp.target_sink == 'file':
-        print billlines[0].printHeaderLabels()
-        for bill_file in billlines:
-            d={}
-            bill_file.printdict(d)
-            print d
-    elif appProp.target_sink=='database':
-        db = DbConnector(appProp)
-        for bill in billlines:
-            db.insertRecord(bill) 
+    print billlines[0].printHeaderLabels()
+    
+    db = DbConnector(appProp)
+    for bill in billlines:
+        db.insertRecord(bill) 
     #for bill in billlines:
     #    print bill
-             
+               
                 
                 
                 

@@ -137,11 +137,6 @@ class CptCode(object):
                 cptcodes.append(self.parsecptFileInfo(line))        
             return cptcodes
     
-    def getdict(self):
-        d={}
-        d['code'] = self.code
-        d['amount'] = self.amount
-        return d
     #function to parse the line to get a provider object
     def parsecptFileInfo(self, line,hdr=True):
         return CptCode(line[0], float(line[1]))
@@ -181,14 +176,3 @@ class BillLine(object):
                                                       'NULL' if self.linenumber == None else self.linenumber,
                                                       self.billedcptcodes.dbOutputFormat(),
                                                       self.paidcptcodes.dbOutputFormat())
-    def printdict(self,d2):
-        home_d=self.__dict__
-        keys = home_d.keys()
-        for key in keys:
-            if isinstance(home_d[key], dict):
-                self.printdict(home_d[key],d2)
-            elif isinstance(home_d[key],CptCode) or isinstance(home_d[key],Provider) or isinstance(home_d[key],Claimant):
-                d2[key]=home_d[key].__dict__
-            else:
-                d2[key]=self.__dict__[key]
-
