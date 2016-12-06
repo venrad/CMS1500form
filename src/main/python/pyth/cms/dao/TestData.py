@@ -5,8 +5,12 @@ Created on Nov 30, 2016
 '''
 
 from pyth.cms.dao.DbConnect import DbConnector
-from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine, BillingProvider
+from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine, BillingProvider,\
+    FacilityProvider, RenderingProvider, ReferringProvider, PaidCpt
 from pyth.cms.properties import appProperties as appProp
+from pyth.cms.solr.AccessSolr import CMSSolr
+from pyth.cms.dao.EntityDAO import FacilityProviderDAO, RenderingProviderDAO,\
+    ReferringProviderDAO, BilledCptCodeDAO, PaidCptCodeDAO
 
 
 def printdict(dictitem,d2):
@@ -21,22 +25,42 @@ def printdict(dictitem,d2):
 
 
 def prepareData(appProp):
-    provider = Provider()
-    providerlist = provider.getProviders()
-    providerslen = len(providerlist)
+ #   provider = Provider()
+ #   providerlist = provider.getProviders()
+ #   providerslen = len(providerlist)
     
     billprovider = BillingProvider()
     billingproviderlist = billprovider.getBillProviders()
     billproviderslen =len(billingproviderlist)
     
-        
+    facilityprovider = FacilityProviderDAO()
+    facilitylist = facilityprovider.getProviders()
+    facilitylen = len(facilitylist)
+    
+    renderingprovider = RenderingProviderDAO()
+    renderinglist = renderingprovider.getProviders()
+    renderinglen = len(renderinglist)
+    
+    referringprovider = ReferringProviderDAO()
+    referringlist = referringprovider.getProviders()
+    referringlen = len(referringlist)
+    
     claimant = Claimant()
     cllist = claimant.getClaimants()
     claimantslen = len(cllist)
     
     cptcodes = CptCode()
     cpts = cptcodes.getCodes()
-    cptslen = len(cpts)   
+    cptslen = len(cpts) 
+    
+    billedCptcodes = BilledCptCodeDAO()
+    billedcpts = billedCptcodes.getCodes()
+    billedcptlen = len(billedcpts) 
+    
+    paidCptcodes = PaidCptCodeDAO()
+    paidcpts = paidCptcodes.getCodes()
+    paidcptlen = len(paidcpts) 
+      
     '''
     Generate a billline and then use this array to build bills which in turn will generate the cclaims
     '''
@@ -49,38 +73,41 @@ def prepareData(appProp):
                 
                 for lineno in range(1, random.randint(1,appProp.MAX_LINES_PER_BILL)):
                     billlines.append(
-                        BillLine(cllist[clmt],   #Claimant 
+                        BillLine(cllist[clmt % claimantslen],   #Claimant 
                                  appProp.CLAIM_PREFIX + str(claim).ljust(3,'0'), # claim number
                                  appProp.BILL_PREFIX+appProp.CLAIM_PREFIX+str(bills).ljust(6,'0'), # Bill Number
                                  billingproviderlist[bills  % billproviderslen], # Billing Provider
-                                 providerlist[(bills) % providerslen], # Rendering Provider
-                                 providerlist[(bills - 2)% providerslen], #facility provider
+                                 renderinglist[(bills) % renderinglen], # Rendering Provider
+                                 facilitylist[(bills)% facilitylen], #facility provider
                                  lineno, 
-                                 cpts[lineno % cptslen], # Billed copt
-                                 cpts[(lineno -1) % cptslen], # paid cpt
+                                 billedcpts[lineno % billedcptlen], # Billed copt
+                                 paidcpts[lineno % paidcptlen], # paid cpt
                         ))
  
     return billlines                
             
 if __name__ == '__main__':
+    
     billlines = prepareData(appProp)
+#    c = CMSSolr()
+#   for 
+#    c.insertDocument()
+    
+    
     if appProp.target_sink == 'file':
         print billlines[0].printHeaderLabels()
         for bill_file in billlines:
-            d={}
-            bill_file.printdict(d)
-            print d
+            print(bill_file.solrFormat())   
+    
+    elif appProp.target_sink=='solr':
+        c = CMSSolr()
+        for bill_file in billlines:
+            #dictArr.append(bill_file)
+            c.insertDocument(bill_file)    
+            
     elif appProp.target_sink=='database':
         db = DbConnector(appProp)
         for bill in billlines:
             db.insertRecord(bill) 
     #for bill in billlines:
-    #    print bill
-             
-                
-                
-                
-                
-                
-                
-                
+    #    print bill  

@@ -52,7 +52,7 @@ class Provider:
     
     #function to parse the line to get a provider object
     def parseProviderInfo(self, line):
-        return Provider(line[0], line[1], line[2], line[3], line[4],line[5])
+        return self(line[0], line[1], line[2], line[3], line[4],line[5])
     
     def dbOutputFormat(self):      
         return '%s, %s, %s, %s, %s, %s' %('NULL' if self.npi =='' else "'" + self.npi +"'",
@@ -61,6 +61,16 @@ class Provider:
                                           'NULL' if self.city == '' else "'" +self.city+"'", 
                                           'NULL' if self.state == '' else "'" +self.state+"'", 
                                           'NULL' if self.zipcode == '' else "'" +self.zipcode+"'")
+
+
+class FacilityProvider(Provider):
+    pass
+
+class RenderingProvider(Provider):
+    pass
+
+class ReferringProvider(Provider):
+    pass
            
 '''
 
@@ -86,7 +96,7 @@ class BillingProvider:
                                               prefix +'Address',
                                               prefix + 'City',
                                               prefix + 'State',
-                                              prefix + 'Zip')
+                                              prefix + 'Zipcode')
     # function to get provider array to be used during the file file building
     def getBillProviders(self):
         billproviders=[]
@@ -200,14 +210,19 @@ class CptCode(object):
     #function to parse the line to get a provider object
     def parsecptFileInfo(self, line,hdr=True):
         return CptCode(line[0], float(line[1]))
-    
+
+class BilledCpt(CptCode):
+    pass
+
+class PaidCpt(CptCode):
+    pass    
     
 class BillLine(object):
     def __init__(self, claimant=None,claim=None, bills=None, billprovider=None, renderingprovider=None,
                  facilityprovider=None, linenumber=None, billedcptcodes=None, paidcptcodes=None):
         self.claimant = claimant
-        self.claim=claim
-        self.bills = bills
+        self.claimnumber=claim
+        self.billnumber = bills
         self.billprovider= billprovider
         self.renderingprovider = renderingprovider
         self.facilityprovider = facilityprovider
@@ -223,27 +238,41 @@ class BillLine(object):
                                               self.billedcptcodes.printHeaderLabels('Billed'), 
                                               self.paidcptcodes.printHeaderLabels('Paid'))
     def __str__(self):
-        return '%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claim, self.bills, self.billprovider,
+        return '%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claimnumber, self.billnumber, self.billprovider,
                                               self.renderingprovider, self.facilityprovider, self.linenumber,
                                               self.billedcptcodes, self.paidcptcodes)
     def dbOutputFormat(self):
         return '%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s' %(self.claimant.dbOutputFormat(),
-                                                      'NULL' if self.claim == None else "'" + self.claim+"'",
-                                                      'NULL' if self.bills == None else "'" + self.bills+"'",
+                                                      'NULL' if self.claimnumber == None else "'" + self.claimnumber+"'",
+                                                      'NULL' if self.billnumber == None else "'" + self.billnumber+"'",
                                                       self.billprovider.dbOutputFormat(),
                                                       self.renderingprovider.dbOutputFormat(),
                                                       self.facilityprovider.dbOutputFormat(),
                                                       'NULL' if self.linenumber == None else self.linenumber,
                                                       self.billedcptcodes.dbOutputFormat(),
                                                       self.paidcptcodes.dbOutputFormat())
-    def printdict(self,d2):
-        home_d=self.__dict__
+    def solrFormat(self):
+        output={}
+        self.printdict(self.__dict__, output)
+        return output
+        
+    def printdict(self,home_d={},output={},objtype=None):
         keys = home_d.keys()
         for key in keys:
             if isinstance(home_d[key], dict):
-                self.printdict(home_d[key],d2)
-            elif isinstance(home_d[key],CptCode) or isinstance(home_d[key],Provider) or isinstance(home_d[key],Claimant):
-                d2[key]=home_d[key].__dict__
+                self.printdict(home_d[key],output)
+            elif (isinstance(home_d[key],CptCode) or 
+                            isinstance(home_d[key],BillingProvider) or 
+                            isinstance(home_d[key],FacilityProvider) or 
+                            isinstance(home_d[key],RenderingProvider) or
+                            isinstance(home_d[key],ReferringProvider) or
+                            isinstance(home_d[key],Claimant) or
+                            isinstance(home_d[key],BilledCpt) or
+                            isinstance(home_d[key],PaidCpt)):
+                self.printdict(home_d[key].__dict__,output, home_d[key].__class__.__name__)
             else:
-                d2[key]=self.__dict__[key]
+                if objtype != None:
+                    output[(objtype+key).lower()] = home_d[key]
+                else: 
+                    output[key.lower()]=home_d[key]
 
