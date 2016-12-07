@@ -10,7 +10,7 @@ from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine, Billi
 from pyth.cms.properties import appProperties as appProp
 from pyth.cms.solr.AccessSolr import CMSSolr
 from pyth.cms.dao.EntityDAO import FacilityProviderDAO, RenderingProviderDAO,\
-    ReferringProviderDAO, BilledCptCodeDAO, PaidCptCodeDAO
+    ReferringProviderDAO, BilledCptCodeDAO, PaidCptCodeDAO, BillingProviderDAO
 
 
 def printdict(dictitem,d2):
@@ -25,11 +25,8 @@ def printdict(dictitem,d2):
 
 
 def prepareData(appProp):
- #   provider = Provider()
- #   providerlist = provider.getProviders()
- #   providerslen = len(providerlist)
     
-    billprovider = BillingProvider()
+    billprovider = BillingProviderDAO()
     billingproviderlist = billprovider.getBillProviders()
     billproviderslen =len(billingproviderlist)
     
@@ -48,11 +45,7 @@ def prepareData(appProp):
     claimant = Claimant()
     cllist = claimant.getClaimants()
     claimantslen = len(cllist)
-    
-    cptcodes = CptCode()
-    cpts = cptcodes.getCodes()
-    cptslen = len(cpts) 
-    
+        
     billedCptcodes = BilledCptCodeDAO()
     billedcpts = billedCptcodes.getCodes()
     billedcptlen = len(billedcpts) 
@@ -92,22 +85,21 @@ if __name__ == '__main__':
 #    c = CMSSolr()
 #   for 
 #    c.insertDocument()
-    
-    
-    if appProp.target_sink == 'file':
-        print billlines[0].printHeaderLabels()
-        for bill_file in billlines:
-            print(bill_file.solrFormat())   
-    
-    elif appProp.target_sink=='solr':
-        c = CMSSolr()
-        for bill_file in billlines:
-            #dictArr.append(bill_file)
-            c.insertDocument(bill_file)    
-            
-    elif appProp.target_sink=='database':
-        db = DbConnector(appProp)
-        for bill in billlines:
-            db.insertRecord(bill) 
-    #for bill in billlines:
+    for sink in appProp.target_sink.split(" "):
+        if sink == 'file':
+            print billlines[0].printHeaderLabels()
+            for bill_file in billlines:
+                print(bill_file)   
+        
+        elif sink=='solr':
+            c = CMSSolr()
+            for bill_file in billlines:
+                #dictArr.append(bill_file)
+                c.insertDocument(bill_file)    
+                
+        elif sink=='database':
+            db = DbConnector(appProp)
+            for bill in billlines:
+                db.insertRecord(bill) 
+        #for bill in billlines:
     #    print bill  

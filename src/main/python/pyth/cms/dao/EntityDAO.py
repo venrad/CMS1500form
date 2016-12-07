@@ -8,20 +8,43 @@ from pyth.cms.model.Entities import BillingProvider, FacilityProvider, Rendering
 from pyth.cms.properties import appProperties as appProp
 import csv
 
+import logging
+
+module_logger = logging.getLogger('pyth.cms.dao.EntityDAO')
+
 class ProviderDAO(object):
     pass
+
+class BillingProviderDAO(ProviderDAO):
+    def __init__(self):
+        self.logger = logging.getLogger('pyth.cms.dao.EntityDAO.BillingProviderDAO')
+        pass
+    
+        # function to get provider array to be used during the file file building
+    def getBillProviders(self):
+        billproviders=[]
+        i=0
+        with open(appProp.billproviderfilename, 'rU') as csvfile:
+            csvread = csv.reader(csvfile, delimiter='|')
+            for line in csvread:
+                if appProp.billproviderhdr:
+                    if i==0:
+                        i+=1
+                        continue
+                billproviders.append(self.parseProviderInfo(line))        
+            return billproviders
+    
+    #function to parse the line to get a provider object
+    def parseProviderInfo(self, line):
+        return BillingProvider(line[0], line[1], line[2], line[3], line[4],line[5], line[6])
+
     
 class FacilityProviderDAO(ProviderDAO):
     '''
     classdocs
     '''
-
-
     def __init__(self):
-        '''
-        Constructor
-        '''
-        
+        pass
     def getProviders(self):
         providers=[]
         i=0
@@ -40,15 +63,9 @@ class FacilityProviderDAO(ProviderDAO):
         return FacilityProvider(line[0], line[1], line[2], line[3], line[4],line[5])
 
 class RenderingProviderDAO(ProviderDAO):
-    '''
-    classdocs
-    '''
-
-
+ 
     def __init__(self):
-        '''
-        Constructor
-        '''
+        pass
         
     def getProviders(self):
         providers=[]
@@ -68,16 +85,10 @@ class RenderingProviderDAO(ProviderDAO):
         return RenderingProvider(line[0], line[1], line[2], line[3], line[4],line[5])
 
 class ReferringProviderDAO(ProviderDAO):
-    '''
-    classdocs
-    '''
-
 
     def __init__(self):
-        '''
-        Constructor
-        '''
-        
+        pass
+            
     def getProviders(self):
         providers=[]
         i=0

@@ -35,25 +35,7 @@ class Provider:
                                           prefix +'Address',
                                           prefix + 'City',
                                           prefix + 'State',
-                                          prefix + 'Zip')
-    # function to get provider array to be used during the file file building
-    def getProviders(self):
-        providers=[]
-        i=0
-        with open(appProperties.providerfilename, 'rU') as csvfile:
-            csvread = csv.reader(csvfile, delimiter='|')
-            for line in csvread:
-                if appProperties.providerhdr:
-                    if i==0:
-                        i+=1
-                        continue
-                providers.append(self.parseProviderInfo(line))        
-            return providers
-    
-    #function to parse the line to get a provider object
-    def parseProviderInfo(self, line):
-        return self(line[0], line[1], line[2], line[3], line[4],line[5])
-    
+                                          prefix + 'Zip')    
     def dbOutputFormat(self):      
         return '%s, %s, %s, %s, %s, %s' %('NULL' if self.npi =='' else "'" + self.npi +"'",
                                           'NULL' if self.name == '' else "'" +self.name+"'",
@@ -97,23 +79,6 @@ class BillingProvider:
                                               prefix + 'City',
                                               prefix + 'State',
                                               prefix + 'Zipcode')
-    # function to get provider array to be used during the file file building
-    def getBillProviders(self):
-        billproviders=[]
-        i=0
-        with open(appProperties.billproviderfilename, 'rU') as csvfile:
-            csvread = csv.reader(csvfile, delimiter='|')
-            for line in csvread:
-                if appProperties.billproviderhdr:
-                    if i==0:
-                        i+=1
-                        continue
-                billproviders.append(self.parseProviderInfo(line))        
-            return billproviders
-    
-    #function to parse the line to get a provider object
-    def parseProviderInfo(self, line):
-        return BillingProvider(line[0], line[1], line[2], line[3], line[4],line[5], line[6])
     
     def dbOutputFormat(self):      
         return '%s, %s, %s, %s, %s, %s, %s' %("'" + self.taxid + "'", 
