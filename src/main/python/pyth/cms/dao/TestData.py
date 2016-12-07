@@ -3,15 +3,20 @@ Created on Nov 30, 2016
 
 @author: Venkatesh
 '''
-
-from pyth.cms.dao.DbConnect import DbConnector
-from pyth.cms.model.Entities import Provider, Claimant, CptCode, BillLine, BillingProvider,\
-    FacilityProvider, RenderingProvider, ReferringProvider, PaidCpt
+import logging
+from pyth.cms.dao.SourceTargetConnector import DbConnector, FileConnector,\
+    SolrConnector
+from pyth.cms.model.Entities import Claimant, CptCode, BillLine
 from pyth.cms.properties import appProperties as appProp
-from pyth.cms.solr.AccessSolr import CMSSolr
 from pyth.cms.dao.EntityDAO import FacilityProviderDAO, RenderingProviderDAO,\
     ReferringProviderDAO, BilledCptCodeDAO, PaidCptCodeDAO, BillingProviderDAO
+from pysolr import SolrError
 
+
+module_logger = logging.getLogger('pyth.cms.dao.TestData')
+module_logger.addHandler(logging.StreamHandler())
+module_logger.setLevel(logging.INFO)
+#module_logger.setLevel(logging.INFO)
 
 def printdict(dictitem,d2):
     keys = dictitem.keys()
@@ -87,19 +92,29 @@ if __name__ == '__main__':
 #    c.insertDocument()
     for sink in appProp.target_sink.split(" "):
         if sink == 'file':
-            print billlines[0].printHeaderLabels()
+            module_logger.info('Starting with File Loader')
+            fileconnector = FileConnector(appProp)
+            fileconnector.writehdr(billlines[0].printHeaderLabels())
             for bill_file in billlines:
-                print(bill_file)   
+                fileconnector.writelines(str(bill_file)) 
+            fileconnector.close()
+            module_logger.info('Completed writing into the file')  
         
         elif sink=='solr':
-            c = CMSSolr()
-            for bill_file in billlines:
-                #dictArr.append(bill_file)
-                c.insertDocument(bill_file)    
+            module_logger.info('Starting to load into Solr')
+            try : 
+                dictArr=[]
+                solrconn = SolrConnector(appProp)
+                for bill_file in billlines:
+                    dictArr.append(bill_file.solrFormat())
+                solrconn.insertDocument(dictArr) 
+                module_logger.info('Completed writing into Solr Collection')   
+            except SolrError:
+                module_logger.error('Solr connection not available. Check if Solr is up and running')
                 
         elif sink=='database':
+            module_logger.info('Starting to load into Db')
             db = DbConnector(appProp)
             for bill in billlines:
                 db.insertRecord(bill) 
-        #for bill in billlines:
-    #    print bill  
+            module_logger.info('Completed write to DB')
