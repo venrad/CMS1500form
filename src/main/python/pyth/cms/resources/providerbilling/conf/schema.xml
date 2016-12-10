@@ -155,6 +155,9 @@
 <field name="billedcptamount" type="float" indexed="true" stored="true" multiValued="false"/>
 <field name="paidcptcode" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="paidcptamount" type="float" indexed="true" stored="true" multiValued="false"/>
+<field name="receiveddate" type="date" indexed="true" stored="true" multiValued="false"/>
+<field name="servicedate" type="date" indexed="true" stored="true" multiValued="false"/>
+
    <!-- Common metadata fields, named specifically to match up with
      SolrCell metadata when parsing rich documents such as Word, PDF.
      Some fields are multiValued only because Tika currently may return
@@ -305,6 +308,9 @@
 <copyField source="billedcptamount" dest ="text"/>
 <copyField source="paidcptcode" dest ="text"/>
 <copyField source="paidcptamount" dest ="text"/>
+<copyField source="receiveddate" dest ="text"/>
+<copyField source="servicedate" dest ="text"/>
+
  
 
    <!-- Copy the price into a currency enabled field (default USD) -->

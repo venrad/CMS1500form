@@ -11,6 +11,7 @@ from pyth.cms.properties import appProperties as appProp
 from pyth.cms.dao.EntityDAO import FacilityProviderDAO, RenderingProviderDAO,\
     ReferringProviderDAO, BilledCptCodeDAO, PaidCptCodeDAO, BillingProviderDAO
 from pysolr import SolrError
+import csv, datetime
 
 
 module_logger = logging.getLogger('pyth.cms.dao.TestData')
@@ -27,6 +28,19 @@ def printdict(dictitem,d2):
             d2[key]=dictitem[key].__dict__
         else:
             d2[key]=dictitem[key]
+
+def getDates():
+    dates=[]
+    i=0
+    with open(appProp.datesfilename, 'rU') as csvfile:
+        csvread = csv.reader(csvfile, delimiter='|')
+        for line in csvread:
+            if appProp.dateshdr:
+                if i==0:
+                    i+=1
+                    continue
+            dates.append(datetime.datetime.strptime(line[0], '%Y/%m/%d'))        
+        return dates
 
 
 def prepareData(appProp):
@@ -58,12 +72,14 @@ def prepareData(appProp):
     paidCptcodes = PaidCptCodeDAO()
     paidcpts = paidCptcodes.getCodes()
     paidcptlen = len(paidcpts) 
-      
+                  
     '''
     Generate a billline and then use this array to build bills which in turn will generate the cclaims
     '''
     import random
     billlines=[]
+    
+    dates = getDates()
     
     for clmt in range(1, random.randint(2,appProp.MAX_CLAIMANT_COUNT)):
         for claim in range(1, random.randint(1,appProp.MAX_CLAIM_COUNT)):
@@ -79,11 +95,30 @@ def prepareData(appProp):
                                  facilitylist[(bills)% facilitylen], #facility provider
                                  lineno, 
                                  billedcpts[lineno % billedcptlen], # Billed copt
-                                 paidcpts[lineno % paidcptlen], # paid cpt
+                                 validpaidamt(paidcpts,paidcptlen, billedcpts[lineno % billedcptlen]), # paid cpt
+                                 dates[bills % len(dates)], # received Date
+                                 validServiceDate(dates, dates[bills % len(dates)])
                         ))
  
     return billlines                
-            
+ 
+def validpaidamt(paidcpts, paidcptlen, billedcpt):
+    import random
+    while True:
+        pd = paidcpts[random.randint(1,appProp.MAX_LINES_PER_BILL) % paidcptlen]
+        if pd.amount <= billedcpt.amount :
+            return pd
+        
+        
+def validServiceDate(dates, rcvdate):
+    import datetime, random
+    while True:
+        serdate = dates[random.randint(1, len(dates)) % len(dates)]
+        if serdate<= rcvdate :
+            return serdate
+        
+        
+    
 if __name__ == '__main__':
     
     billlines = prepareData(appProp)

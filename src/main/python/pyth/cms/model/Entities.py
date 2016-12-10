@@ -184,7 +184,7 @@ class PaidCpt(CptCode):
     
 class BillLine(object):
     def __init__(self, claimant=None,claim=None, bills=None, billprovider=None, renderingprovider=None,
-                 facilityprovider=None, linenumber=None, billedcptcodes=None, paidcptcodes=None):
+                 facilityprovider=None, linenumber=None, billedcptcodes=None, paidcptcodes=None, receiveddate=None, servicedate=None):
         self.claimant = claimant
         self.claimnumber=claim
         self.billnumber = bills
@@ -194,20 +194,26 @@ class BillLine(object):
         self.linenumber=linenumber
         self.billedcptcodes = billedcptcodes
         self.paidcptcodes = paidcptcodes
+        self.receiveddate = receiveddate
+        self.servicedate=servicedate
     
     def printHeaderLabels(self):
-       return '%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant.printHeaderLabels(), 'Claim Number', 'Bill Number', self.billprovider.printHeaderLabels('Billing'),
+       return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant.printHeaderLabels(), 'Claim Number', 'Bill Number', 
+                                                         self.billprovider.printHeaderLabels('Billing'),
                                               self.renderingprovider.printHeaderLabels('Rendering'), 
                                               self.facilityprovider.printHeaderLabels('Facility'),
                                               'Line Number',
                                               self.billedcptcodes.printHeaderLabels('Billed'), 
-                                              self.paidcptcodes.printHeaderLabels('Paid'))
+                                              self.paidcptcodes.printHeaderLabels('Paid'),
+                                              'Received Date',
+                                              'Service Date')
     def __str__(self):
-        return '%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claimnumber, self.billnumber, self.billprovider,
+        return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claimnumber, self.billnumber, self.billprovider,
                                               self.renderingprovider, self.facilityprovider, self.linenumber,
-                                              self.billedcptcodes, self.paidcptcodes)
+                                              self.billedcptcodes, self.paidcptcodes,
+                                              self.receiveddate, self.servicedate)
     def dbOutputFormat(self):
-        return '%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s' %(self.claimant.dbOutputFormat(),
+        return '%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s, %s, %s' %(self.claimant.dbOutputFormat(),
                                                       'NULL' if self.claimnumber == None else "'" + self.claimnumber+"'",
                                                       'NULL' if self.billnumber == None else "'" + self.billnumber+"'",
                                                       self.billprovider.dbOutputFormat(),
@@ -215,7 +221,9 @@ class BillLine(object):
                                                       self.facilityprovider.dbOutputFormat(),
                                                       'NULL' if self.linenumber == None else self.linenumber,
                                                       self.billedcptcodes.dbOutputFormat(),
-                                                      self.paidcptcodes.dbOutputFormat())
+                                                      self.paidcptcodes.dbOutputFormat(),
+                                                      'NULL' if self.receiveddate == None else "'" + str(self.receiveddate) + "'",
+                                                      'NULL' if self.servicedate==None else "'" + str(self.servicedate) + "'")
     def solrFormat(self):
         output={}
         self.printdict(self.__dict__, output)
