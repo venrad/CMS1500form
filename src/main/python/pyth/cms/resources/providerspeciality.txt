@@ -1,0 +1,64 @@
+Code|Description
+01|General Practice
+02|General Surgery
+03|Allergy/Immunology
+04|Otolaryngology
+05|Anesthesiology
+06|Cardiology
+07|Dermatology
+08|Family Practice
+09|Interventional Pain Management
+10|Gastroenterology
+11|Internal Medicine
+12|Osteopathic Manipulative Therapy
+13|Neurology
+14|Neurosurgery
+15|Unassigned
+16|Obstetrics/Gynecology
+17|Unassigned
+18|Ophthalmology
+19|Oral Surgery (dentists only)
+20|Orthopedic Surgery
+21|Unassigned
+22|Pathology
+23|Unassigned
+24|Plastic and Reconstructive Surgery
+25|Physical Medicine and Rehabilitation
+26|Psychiatry
+27|Unassigned
+28|Colorectal Surgery (formerly proctology)
+29|Pulmonary Disease
+30|Diagnostic Radiology
+31|Unassigned
+33|Thoracic Surgery
+34|Urology
+35|Chiropractic
+36|Nuclear Medicine
+37|Pediatric Medicine
+38|Geriatric Medicine
+39|Nephrology
+40|Hand Surgery
+41|Optometry
+44|Infectious Disease
+46|Endocrinology
+48|Podiatry
+66|Rheumatology
+70|Multispecialty Clinic or Group Practice
+72|Pain Management
+76|Peripheral Vascular Disease
+77|Vascular Surgery
+78|Cardiac Surgery
+79|Addiction Medicine
+81|Critical Care (Intensivists)
+82|Hematology
+83|Hematology/Oncology
+84|Preventive Medicine
+85|Maxillofacial Surgery
+86|Neuropsychiatry
+90|Medical Oncology
+91|Surgical Oncology
+92|Radiation Oncology
+93|Emergency Medicine
+94|Interventional Radiology
+98|Gynecological/Oncology
+99|Unknown Physician Specialty

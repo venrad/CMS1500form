@@ -81,11 +81,28 @@ def prepareData(appProp):
     
     dates = getDates()
     
-    for clmt in range(1, random.randint(2,appProp.MAX_CLAIMANT_COUNT)):
-        for claim in range(1, random.randint(1,appProp.MAX_CLAIM_COUNT)):
-            for bills in range(1, random.randint(2,appProp.MAX_BILLS_COUNT)):
-                
-                for lineno in range(1, random.randint(1,appProp.MAX_LINES_PER_BILL)):
+    NO_OF_CLAIMANTS = random.randint(2,appProp.MAX_CLAIMANT_COUNT)
+    NO_OF_CLAIMS= random.randint(1,appProp.MAX_CLAIM_COUNT)
+    NO_OF_BILLS=random.randint(2,appProp.MAX_BILLS_COUNT)
+    NO_OF_LINES_PER_BILL=random.randint(1,appProp.MAX_LINES_PER_BILL)
+    
+    module_logger.info('Claimants: %d, Claims: %d, Bills: %d, Lines: %d' % (NO_OF_CLAIMANTS, 
+                                                                 NO_OF_CLAIMS, 
+                                                                 NO_OF_BILLS,
+                                                                 NO_OF_LINES_PER_BILL))
+    
+    for clmt in range(1,NO_OF_CLAIMANTS):
+        clm_ctr=1
+        for claim in range(1, NO_OF_CLAIMS):
+            clm_status = 'Accepted' if(clm_ctr < (NO_OF_CLAIMS * appProp.CLAIM_STATUS_RATIO[0]/100)) else 'Rejected'
+            clm_ctr +=1
+#             if(clm_ctr <= NO_OF_CLAIMS * appProp.CLAIM_STATUS_RATIO[0]):
+#                 clm_status = 'Accepted'
+#             else:
+#                 clm_status = 'Rejected'
+                    
+            for bills in range(1, NO_OF_BILLS):                
+                for lineno in range(1, NO_OF_LINES_PER_BILL):
                     billlines.append(
                         BillLine(cllist[clmt % claimantslen],   #Claimant 
                                  appProp.CLAIM_PREFIX + str(claim).ljust(3,'0'), # claim number
@@ -97,7 +114,8 @@ def prepareData(appProp):
                                  billedcpts[lineno % billedcptlen], # Billed copt
                                  validpaidamt(paidcpts,paidcptlen, billedcpts[lineno % billedcptlen]), # paid cpt
                                  dates[bills % len(dates)], # received Date
-                                 validServiceDate(dates, dates[bills % len(dates)])
+                                 validServiceDate(dates, dates[bills % len(dates)]), 
+                                 clm_status #claim status
                         ))
  
     return billlines                

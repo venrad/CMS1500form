@@ -24,6 +24,7 @@ class Provider:
         self.city = city
         self.state = state
         self.zipcode = zipcode
+       
             
     def __str__(self):
         return '%s | %s| %s| %s| %s| %s' %(self.npi, self.name, self.addr1, self.city, self.state, self.zipcode)
@@ -58,7 +59,7 @@ class ReferringProvider(Provider):
 
 '''
 class BillingProvider:             
-    def __init__(self,  taxid='', npi='', name='', addr1='', city='', state='', zipcode=''):
+    def __init__(self,  taxid='', npi='', name='', addr1='', city='', state='', zipcode='',speciality=''):
         self.taxid= taxid
         self.npi = npi
         self.name = name
@@ -66,28 +67,31 @@ class BillingProvider:
         self.city = city
         self.state = state
         self.zipcode = zipcode
+        self.speciality=speciality
             
     def __str__(self):
-        return '%s |%s | %s| %s| %s| %s| %s' %(self.taxid, self.npi, self.name, self.addr1, self.city, self.state, self.zipcode)
+        return '%s |%s | %s| %s| %s| %s| %s| %s' %(self.taxid, self.npi, self.name, self.addr1, self.city, self.state, self.zipcode,self.speciality)
     
     def printHeaderLabels(self,type=''):
        prefix=type+self.__class__.__name__
-       return '%s |%s | %s| %s| %s| %s| %s' %('Taxid', 
+       return '%s |%s | %s| %s| %s| %s| %s| %s' %('Taxid', 
                                               prefix+'NPI', 
                                               prefix+'Name',
                                               prefix +'Address',
                                               prefix + 'City',
                                               prefix + 'State',
-                                              prefix + 'Zipcode')
+                                              prefix + 'Zipcode',
+                                              prefix + 'Speciality')
     
     def dbOutputFormat(self):      
-        return '%s, %s, %s, %s, %s, %s, %s' %("'" + self.taxid + "'", 
+        return '%s, %s, %s, %s, %s, %s, %s, %s' %("'" + self.taxid + "'", 
                                           'NULL' if self.npi =='' else "'" + self.npi +"'",
                                           'NULL' if self.name == '' else "'" +self.name+"'",
                                           'NULL' if self.addr1 == '' else "'" +self.addr1+"'", 
                                           'NULL' if self.city == '' else "'" +self.city+"'", 
                                           'NULL' if self.state == '' else "'" +self.state+"'", 
-                                          'NULL' if self.zipcode == '' else "'" +self.zipcode+"'")
+                                          'NULL' if self.zipcode == '' else "'" +self.zipcode+"'",
+                                          'NULL' if self.speciality ==''  else "'" + self.speciality+"'")
            
 
 
@@ -184,7 +188,8 @@ class PaidCpt(CptCode):
     
 class BillLine(object):
     def __init__(self, claimant=None,claim=None, bills=None, billprovider=None, renderingprovider=None,
-                 facilityprovider=None, linenumber=None, billedcptcodes=None, paidcptcodes=None, receiveddate=None, servicedate=None):
+                 facilityprovider=None, linenumber=None, billedcptcodes=None, paidcptcodes=None, 
+                 receiveddate=None, servicedate=None, claimstatus=None):
         self.claimant = claimant
         self.claimnumber=claim
         self.billnumber = bills
@@ -196,9 +201,10 @@ class BillLine(object):
         self.paidcptcodes = paidcptcodes
         self.receiveddate = receiveddate
         self.servicedate=servicedate
+        self.claimstatus = claimstatus
     
     def printHeaderLabels(self):
-       return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant.printHeaderLabels(), 'Claim Number', 'Bill Number', 
+       return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant.printHeaderLabels(), 'Claim Number', 'Bill Number', 
                                                          self.billprovider.printHeaderLabels('Billing'),
                                               self.renderingprovider.printHeaderLabels('Rendering'), 
                                               self.facilityprovider.printHeaderLabels('Facility'),
@@ -206,14 +212,16 @@ class BillLine(object):
                                               self.billedcptcodes.printHeaderLabels('Billed'), 
                                               self.paidcptcodes.printHeaderLabels('Paid'),
                                               'Received Date',
-                                              'Service Date')
+                                              'Service Date',
+                                              'Claim Status')
     def __str__(self):
-        return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claimnumber, self.billnumber, self.billprovider,
+        return '%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s |%s' %(self.claimant, self.claimnumber, self.billnumber, 
+                                                              self.billprovider,
                                               self.renderingprovider, self.facilityprovider, self.linenumber,
                                               self.billedcptcodes, self.paidcptcodes,
-                                              self.receiveddate, self.servicedate)
+                                              self.receiveddate, self.servicedate, self.claimstatus)
     def dbOutputFormat(self):
-        return '%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s, %s, %s' %(self.claimant.dbOutputFormat(),
+        return '%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s, %s, %s, %s' %(self.claimant.dbOutputFormat(),
                                                       'NULL' if self.claimnumber == None else "'" + self.claimnumber+"'",
                                                       'NULL' if self.billnumber == None else "'" + self.billnumber+"'",
                                                       self.billprovider.dbOutputFormat(),
@@ -223,7 +231,8 @@ class BillLine(object):
                                                       self.billedcptcodes.dbOutputFormat(),
                                                       self.paidcptcodes.dbOutputFormat(),
                                                       'NULL' if self.receiveddate == None else "'" + str(self.receiveddate) + "'",
-                                                      'NULL' if self.servicedate==None else "'" + str(self.servicedate) + "'")
+                                                      'NULL' if self.servicedate==None else "'" + str(self.servicedate) + "'",
+                                                      'NULL' if self.claimstatus==None else "'" + str(self.claimstatus) + "'")
     def solrFormat(self):
         output={}
         self.printdict(self.__dict__, output)
@@ -242,7 +251,7 @@ class BillLine(object):
                             isinstance(home_d[key],Claimant) or
                             isinstance(home_d[key],BilledCpt) or
                             isinstance(home_d[key],PaidCpt)):
-                self.printdict(home_d[key].__dict__,output, home_d[key].__class__.__name__)
+                self.printdict(home_d[key].__dict__,output, home_d[key].__class__.__name__)    
             else:
                 if objtype != None:
                     output[(objtype+key).lower()] = home_d[key]

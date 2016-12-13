@@ -6,14 +6,27 @@ Created on Dec 5, 2016
 
 from pyth.cms.model.Entities import BillingProvider, FacilityProvider, RenderingProvider, ReferringProvider, BilledCpt, PaidCpt
 from pyth.cms.properties import appProperties as appProp
-import csv
+import csv, random
 
 import logging
 
 module_logger = logging.getLogger('pyth.cms.dao.EntityDAO')
 
 class ProviderDAO(object):
-    pass
+    
+       def getSpecialitys(self):
+        specialities=[]
+        i=0
+        with open(appProp.specialityfilename, 'rU') as special:
+            splreader = csv.reader(special,delimiter='|' )
+            for line in splreader:
+                if appProp.splhdr:
+                    if i==0:
+                        i+=1
+                        continue
+                specialities.append(line[0] + '-' + line[1])    
+            return specialities
+
 
 class BillingProviderDAO(ProviderDAO):
     def __init__(self):
@@ -23,7 +36,8 @@ class BillingProviderDAO(ProviderDAO):
         # function to get provider array to be used during the file file building
     def getBillProviders(self):
         billproviders=[]
-        i=0
+        specialities = self.getSpecialitys()
+        i=0        
         with open(appProp.billproviderfilename, 'rU') as csvfile:
             csvread = csv.reader(csvfile, delimiter='|')
             for line in csvread:
@@ -31,12 +45,13 @@ class BillingProviderDAO(ProviderDAO):
                     if i==0:
                         i+=1
                         continue
-                billproviders.append(self.parseProviderInfo(line))        
+                billproviders.append(self.parseProviderInfo(line,specialities[random.randint(1,20)]))        
             return billproviders
     
     #function to parse the line to get a provider object
-    def parseProviderInfo(self, line):
-        return BillingProvider(line[0], line[1], line[2], line[3], line[4],line[5], line[6])
+    def parseProviderInfo(self, line, speciality):
+        
+        return BillingProvider(line[0], line[1], line[2], line[3], line[4],line[5], line[6], speciality)
 
     
 class FacilityProviderDAO(ProviderDAO):
@@ -47,6 +62,7 @@ class FacilityProviderDAO(ProviderDAO):
         pass
     def getProviders(self):
         providers=[]
+       
         i=0
         with open(appProp.providerfilename, 'rU') as csvfile:
             csvread = csv.reader(csvfile, delimiter='|')
