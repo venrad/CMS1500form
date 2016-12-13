@@ -133,22 +133,23 @@
 <field name="billnumber" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="billingprovidertaxid" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="billingprovidernpi" type="string" indexed="true" stored="true" multiValued="false"/>
-<field name="billingprovidername" type="text_general" indexed="true" stored="true" multiValued="false"/>
+<field name="billingprovidername" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="billingprovideraddr1" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="billingprovidercity" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="billingproviderstate" type="text_general" indexed="true" stored="true" multiValued="false"/>
+<field name="billingprovidercity" type="string" indexed="true" stored="true" multiValued="false"/>
+<field name="billingproviderstate" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="billingproviderzipcode" type="text_general" indexed="true" stored="true" multiValued="false"/>
+<field name="billingproviderspeciality" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="renderingprovidernpi" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="renderingprovidername" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="renderingprovideraddr1" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="renderingprovidercity" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="renderingproviderstate" type="text_general" indexed="true" stored="true" multiValued="false"/>
+<field name="renderingprovidercity" type="string" indexed="true" stored="true" multiValued="false"/>
+<field name="renderingproviderstate" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="renderingproviderzipcode" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="facilityprovidernpi" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="facilityprovidername" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="facilityprovideraddr1" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="facilityprovidercity" type="text_general" indexed="true" stored="true" multiValued="false"/>
-<field name="facilityproviderstate" type="text_general" indexed="true" stored="true" multiValued="false"/>
+<field name="facilityprovidercity" type="string" indexed="true" stored="true" multiValued="false"/>
+<field name="facilityproviderstate" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="facilityproviderzipcode" type="text_general" indexed="true" stored="true" multiValued="false"/>
 <field name="linenumber" type="long" indexed="true" stored="true" multiValued="false"/>
 <field name="billedcptcode" type="string" indexed="true" stored="true" multiValued="false"/>
@@ -157,6 +158,8 @@
 <field name="paidcptamount" type="float" indexed="true" stored="true" multiValued="false"/>
 <field name="receiveddate" type="date" indexed="true" stored="true" multiValued="false"/>
 <field name="servicedate" type="date" indexed="true" stored="true" multiValued="false"/>
+<field name="claimstatus" type="string" indexed="true" stored="true" multiValued="false"/>
+
 
    <!-- Common metadata fields, named specifically to match up with
      SolrCell metadata when parsing rich documents such as Word, PDF.
@@ -291,6 +294,7 @@
 <copyField source="billingprovidercity" dest ="text"/>
 <copyField source="billingproviderstate" dest ="text"/>
 <copyField source="billingproviderzipcode" dest ="text"/>
+<copyField source="billingproviderspeciality" dest="text"/>
 <copyField source="renderingprovidernpi" dest ="text"/>
 <copyField source="renderingprovidername" dest ="text"/>
 <copyField source="renderingprovideraddr1" dest ="text"/>
@@ -310,6 +314,8 @@
 <copyField source="paidcptamount" dest ="text"/>
 <copyField source="receiveddate" dest ="text"/>
 <copyField source="servicedate" dest ="text"/>
+<copyField source="claimstatus" dest ="text"/>
+
 
  
 
